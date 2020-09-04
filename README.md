@@ -91,7 +91,7 @@ ghcr.io/president-business-corp/helm-test:latest	mychart	0.1.0  	308d229	3.5 KiB
 Similar to `docker rmi` https://helm.sh/docs/topics/registries/#remove
 
 ```shell
-# if you haven't set this env you'll need it
+# ensure the required environment variable is set (only required once)
 export HELM_EXPERIMENTAL_OCI=1
 
 helm chart remove ghcr.io/president-business-corp/helm-test:latest
@@ -102,7 +102,7 @@ helm chart remove ghcr.io/president-business-corp/helm-test:latest
 Similar to `docker pull` https://helm.sh/docs/topics/registries/#pull
 
 ```shell
-# if you haven't set this env you'll need it
+# ensure the required environment variable is set (only required once)
 export HELM_EXPERIMENTAL_OCI=1
 
 helm chart pull containers.pkg.github.com/president-business-corp/helm-test:latest  
@@ -122,7 +122,7 @@ You'll need a recent version of the `helm` command installed.
 brew install helm
 ```
 
-## Environment Variable
+### Environment Variable
 
 You'll receive the following error using helm charts and an OCI registry if you don't set this environment variable. You only need to set this once per shell session but I've listed it with every instruction to ensure fewer mistakes.
 
@@ -130,4 +130,19 @@ You'll receive the following error using helm charts and an OCI registry if you 
 
 ```shell
 export HELM_EXPERIMENTAL_OCI=1 
+```
+
+## Migrating?
+
+https://helm.sh/docs/topics/registries/#migrating-from-chart-repos
+
+```
+# (Helm 2 CLI) brew install helm@2
+helm fetch CHART
+
+# ensure the required environment variable is set (only required once)
+export HELM_EXPERIMENTAL_OCI=1
+
+helm chart save CHART ghcr.io/president-business-corp/CHART:latest
+helm chart push ghcr.io/president-business-corp/CHART:latest
 ```
